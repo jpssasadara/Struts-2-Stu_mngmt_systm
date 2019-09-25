@@ -1,0 +1,55 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- Configuration for the default package. -->
+    <package name="default" extends="struts-default">
+                
+		<!--   Registration action  -->
+		<action name="RegistrationAction"  class="jps.sasadara.action.RegistrationAction" >
+			<result name="success">/Login_Registration/Login_Registration.jsp</result>
+			<result name="login">/Login_Registration/Login_Registration.jsp</result>
+                        <!-- this is for handel errors-->
+                        <result name="input">/Login_Registration/Login_Registration.jsp</result>
+		</action>
+    </package>
+    <package name="loginAndlogout"  extends="struts-default">
+                
+                <interceptors>
+			<interceptor class="jps.sasadara.interceptor.LoginInterceptor" name="loginInterceptor">
+			</interceptor>
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="loginInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+                
+                <global-results>
+			<result name="login">/Login_Registration/Login_Registration.jsp</result>
+		</global-results>
+		
+                <!--   login action  -->
+		<action name="loginUser" class="jps.sasadara.action.LoginAction" method="loginRegisterUser">
+			<result name="success" type="redirect">/homeAction.action</result>
+			<result name="login">/Login_Registration/Login_Registration.jsp</result>
+                        <!-- this is for handel errors-->
+                        <result name="input">/Login_Registration/Login_Registration.jsp</result>
+		</action>
+
+		<!-- home link action -->
+		<action name="homeAction" class="jps.sasadara.action.LoginAction" method="home">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/testjsp.jsp</result>
+		</action>
+		<!--   logout action  -->
+		<action name="logOut" class="jps.sasadara.action.LoginAction" method="logOut">
+			<result name="success">/Login_Registration/Login_Registration.jsp</result>
+		</action>
+
+		
+		
+    </package> 
+   
+    
+</struts>
