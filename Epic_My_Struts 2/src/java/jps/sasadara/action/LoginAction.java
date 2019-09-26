@@ -47,6 +47,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
                 if(us!=null){
                 if (getEmail().equals(us.getUserId()) && password.equals(us.getPassword())) {
 			session.put("loginId", getEmail());
+                        session.put("object",us.getRole());
 			return SUCCESS;
 		} else {
 			addActionError("Please Enter Valid emailId or Password");

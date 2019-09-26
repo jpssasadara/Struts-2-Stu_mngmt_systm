@@ -19,10 +19,18 @@
                 <interceptors>
 			<interceptor class="jps.sasadara.interceptor.LoginInterceptor" name="loginInterceptor">
 			</interceptor>
+                        <interceptor class="jps.sasadara.interceptor.RoleInterceptor" name="RoleInterceptor">
+			</interceptor>
 			<interceptor-stack name="loginStack">
 				<interceptor-ref name="loginInterceptor" />
 				<interceptor-ref name="defaultStack" />
 			</interceptor-stack>
+                        <interceptor-stack name="loginStack2">
+				<interceptor-ref name="loginInterceptor" />
+				<interceptor-ref name="defaultStack" />
+                                <interceptor-ref name="RoleInterceptor" />
+			</interceptor-stack>
+                        
 		</interceptors>
                 
                 <global-results>
@@ -50,6 +58,17 @@
 		
 		
     </package> 
-   
+    <package name="CRUD" extends="struts-default,loginAndlogout">
+
+                 <!--   Registration action  -->
+                 <action name="CRUD"  class="jps.sasadara.action.CRUD" >
+                     <interceptor-ref name="loginStack2" />
+                         <result name="success">/dash.jsp</result>
+                         <result name ="nopermission">/nopermission.jsp</result>
+                         <result name="login">/Login_Registration/Login_Registration.jsp</result>
+                         <!-- this is for handel errors-->
+                         <result name="input">/Login_Registration/Login_Registration.jsp</result>
+                 </action>
+     </package>
     
 </struts>
