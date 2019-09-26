@@ -20,6 +20,8 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	private static final long serialVersionUID = 1L;
 	private String email;
 	private String password;
+        //this will automaticaly convert in to HtttpSession object when transfer action class
+        //to servlet
 	private Map<String, Object> session;
 
 	
