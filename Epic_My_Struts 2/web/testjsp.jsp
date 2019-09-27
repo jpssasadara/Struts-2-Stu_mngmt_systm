@@ -16,6 +16,8 @@
 </head>
     </head>
     <body>
+        <!-- One of example for usage of Value Stack-->
+        <s:property value="user.userId"/>
         <div class="container">
             <h1>
                 Hello <s:property value="%{#session['loginId']}"/><br>
